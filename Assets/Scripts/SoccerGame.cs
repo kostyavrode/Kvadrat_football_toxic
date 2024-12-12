@@ -1,0 +1,124 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening; // Import DOTween namespace
+
+public class SoccerGame : MonoBehaviour
+{
+    public GameObject ball;
+    public List<GameObject> players; // List of all players
+    public float ballTravelTime = 2f; // Time for the ball to travel between players
+    public Camera gameCamera; // Camera to focus on players
+    public float cameraMoveDuration = 1f; // Duration for camera movement
+
+    private GameObject currentTarget;
+    private Vector3 targetPosition;
+    private bool isBallFlying;
+    private bool correctInput;
+
+    void OnEnable()
+    {
+        gameCamera=Camera.main;
+        if (players.Count > 0)
+        {
+            PassBallToRandomPlayer();
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PassBallToRandomPlayer();
+            Debug.Log(Time.timeScale);
+        }
+        if (isBallFlying)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow) && targetPosition == currentTarget.transform.Find("HeadTarget").position)
+            {
+                correctInput = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && targetPosition == currentTarget.transform.Find("FeetTarget").position)
+            {
+                correctInput = true;
+            }
+        }
+    }
+
+    void PassBallToRandomPlayer()
+    {
+        Debug.Log("Passing ball to random player");
+        isBallFlying = false;
+        correctInput = false;
+
+        // Choose a random player from the list
+        currentTarget = players[Random.Range(0, players.Count)];
+
+        // Adjust camera to focus on the new target player
+        FocusCameraOnPlayer(currentTarget);
+
+        // Choose a random target on the player (HeadTarget or FeetTarget)
+        Transform headTarget = currentTarget.transform.Find("HeadTarget");
+        Transform feetTarget = currentTarget.transform.Find("FeetTarget");
+        targetPosition = Random.value > 0.5f ? headTarget.position : feetTarget.position;
+
+        StartCoroutine(MoveBallToTarget(targetPosition == headTarget.position));
+    }
+
+    void FocusCameraOnPlayer(GameObject player)
+    {
+        if (gameCamera != null)
+        {
+            Vector3 targetCameraPosition = player.transform.position + new Vector3(0, 5, -10); // Adjust offset as needed
+            gameCamera.transform.DOMove(targetCameraPosition, cameraMoveDuration).SetEase(Ease.InOutQuad);
+            gameCamera.transform.DOLookAt(player.transform.position, cameraMoveDuration).SetEase(Ease.InOutQuad);
+        }
+    }
+
+    IEnumerator MoveBallToTarget(bool isHeadTarget)
+    {
+        isBallFlying = true;
+        Vector3 startPosition = ball.transform.position;
+        float elapsedTime = 0f;
+
+        if (isHeadTarget)
+        {
+            Vector3 midPoint = (startPosition + targetPosition) / 2 + Vector3.up * 5f; // Create a curve upwards
+            while (elapsedTime < ballTravelTime)
+            {
+                float t = elapsedTime / ballTravelTime;
+                Vector3 curvePosition = Vector3.Lerp(Vector3.Lerp(startPosition, midPoint, t), Vector3.Lerp(midPoint, targetPosition, t), t);
+                ball.transform.position = curvePosition;
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
+        else
+        {
+            while (elapsedTime < ballTravelTime)
+            {
+                ball.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / ballTravelTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        ball.transform.position = targetPosition;
+        isBallFlying = false;
+
+        if (correctInput)
+        {
+            PassBallToRandomPlayer();
+        }
+        else
+        {
+            GameOver();
+        }
+    }
+
+    void GameOver()
+    {
+        Debug.Log("GameOver");
+        UITemplate.instance.EndGame();
+    }
+}
