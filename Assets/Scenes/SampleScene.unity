@@ -4078,9 +4078,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 958278215}
-        m_TargetAssemblyTypeName: UITemplate, Assembly-CSharp
-        m_MethodName: UnPauseGame
+      - m_Target: {fileID: 936649283}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

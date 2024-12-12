@@ -66,6 +66,11 @@ public class GameManager : MonoBehaviour
         }    
     }
 
+    public void RestartGame()
+    {
+        EndGame();
+        StartGame();
+    }
     public void StartGame()
     {
         level = Instantiate(levelPrefab);
@@ -74,7 +79,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         ChangeGameState(GameState.END);
-        Destroy(level);
+        Destroy(level.gameObject);
     }
 }
 public enum GameState

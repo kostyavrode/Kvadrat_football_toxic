@@ -12,6 +12,7 @@ public class SoccerGame : MonoBehaviour
     public float cameraMoveDuration = 1f; // Duration for camera movement
 
     private GameObject currentTarget;
+    public Transform center;
     private Vector3 targetPosition;
     private bool isBallFlying;
     private bool correctInput;
@@ -34,6 +35,8 @@ public class SoccerGame : MonoBehaviour
         }
         if (isBallFlying)
         {
+            //gameCamera.transform.DOLookAt(ball.transform.position, cameraMoveDuration).SetEase(Ease.InOutQuad);
+            
             if (Input.GetKeyDown(KeyCode.UpArrow) && targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
@@ -45,6 +48,10 @@ public class SoccerGame : MonoBehaviour
         }
     }
 
+    private void LookAtCenter()
+    {
+        gameCamera.transform.LookAt(center.position);
+    }
     void PassBallToRandomPlayer()
     {
         Debug.Log("Passing ball to random player");
@@ -69,11 +76,17 @@ public class SoccerGame : MonoBehaviour
     {
         if (gameCamera != null)
         {
-            Vector3 targetCameraPosition = player.transform.position + new Vector3(0, 5, -10); // Adjust offset as needed
-            gameCamera.transform.DOMove(targetCameraPosition, cameraMoveDuration).SetEase(Ease.InOutQuad);
-            gameCamera.transform.DOLookAt(player.transform.position, cameraMoveDuration).SetEase(Ease.InOutQuad);
+            Transform cameraPos = player.GetComponent<Footballer>().cameraPos;
+            Vector3 targetCameraPosition = player.transform.position +player.transform.forward*(-3)  
+                                         + transform.up*2+gameCamera.transform.right*(-3);
+            gameCamera.transform.DOMove(cameraPos.position, cameraMoveDuration)
+                .SetEase(Ease.InOutQuad).OnUpdate(LookAtCenter);
+            //gameCamera.transform.DOLookAt(center.position, cameraMoveDuration).SetEase(Ease.InOutQuad);
         }
     }
+
+
+
 
     IEnumerator MoveBallToTarget(bool isHeadTarget)
     {
