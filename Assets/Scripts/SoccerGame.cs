@@ -40,10 +40,12 @@ public class SoccerGame : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) && targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
+                currentTarget.GetComponent<Footballer>().Head();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow) && targetPosition == currentTarget.transform.Find("FeetTarget").position)
             {
                 correctInput = true;
+                currentTarget.GetComponent<Footballer>().Leg();
             }
         }
     }
@@ -59,7 +61,16 @@ public class SoccerGame : MonoBehaviour
         correctInput = false;
 
         // Choose a random player from the list
+        GameObject previousTarget = currentTarget;
+        if (previousTarget != null)
+            //previousTarget.GetComponent<Footballer>().Pass();
         currentTarget = players[Random.Range(0, players.Count)];
+        if (previousTarget == currentTarget)
+        {
+            PassBallToRandomPlayer();
+            return;
+        }
+
 
         // Adjust camera to focus on the new target player
         FocusCameraOnPlayer(currentTarget);
