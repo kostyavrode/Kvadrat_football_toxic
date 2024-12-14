@@ -66,10 +66,9 @@ public class SoccerGame : MonoBehaviour
         //if (previousTarget != null)
             //previousTarget.GetComponent<Footballer>().Pass();
         currentTarget = players[Random.Range(0, players.Count)];
-        if (previousTarget == currentTarget)
+        while (previousTarget == currentTarget)
         {
-            //PassBallToRandomPlayer();
-            return;
+            currentTarget = players[Random.Range(0, players.Count)];
         }
 
 
