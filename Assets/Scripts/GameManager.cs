@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public bool increaseTimeScale;
     private float currentTimeScale;
 
+    private int lastTargetPasses;
+    
+
     private void Awake()
     {
         instance = this;
@@ -70,6 +73,13 @@ public class GameManager : MonoBehaviour
     {
         EndGame();
         StartGame();
+        SetTargetPasses(lastTargetPasses);
+    }
+
+    public void SetTargetPasses(int passes)
+    {
+        level.SetTargetPasses(passes);
+        lastTargetPasses=passes;
     }
     public void StartGame()
     {

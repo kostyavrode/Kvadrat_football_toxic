@@ -12,6 +12,7 @@ public class UITemplate : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     
     [SerializeField] private TMP_Text moneyBar;
+    [SerializeField] private TMP_Text passesBar;
     private void Awake()
     {
         instance = this;
@@ -32,12 +33,25 @@ public class UITemplate : MonoBehaviour
     {
         GameManager.instance.ChangeGameState(GameState.PLAYING);
     }
-    public void EndGame()
+    public void EndGame(bool isWin)
     {
         GameManager.instance.ChangeGameState(GameState.END);
         ShowMoney(Player.instance.GetPlayerMoney().ToString());
-        losePanel.SetActive(true);
         inGamePanel.SetActive(false);
+        if (isWin)
+        {
+            winPanel.SetActive(true);
+            PlayerPrefs.SetInt("Levels",PlayerPrefs.GetInt("Levels")+1);
+        }
+        else
+        {
+            losePanel.SetActive(true);
+        }
+    }
+
+    public void ShowPasses(string target, string success)
+    {
+        passesBar.text = success + " | " + target;
     }
     public void RestartGame()
     {

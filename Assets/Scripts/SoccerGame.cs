@@ -16,6 +16,9 @@ public class SoccerGame : MonoBehaviour
     private Vector3 targetPosition;
     private bool isBallFlying;
     private bool correctInput;
+    
+    public int successPasses;
+    public int targetPasses;
 
     void OnEnable()
     {
@@ -36,8 +39,6 @@ public class SoccerGame : MonoBehaviour
         }
         if (isBallFlying)
         {
-            //gameCamera.transform.DOLookAt(ball.transform.position, cameraMoveDuration).SetEase(Ease.InOutQuad);
-            
             if (Input.GetKeyDown(KeyCode.UpArrow) && targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
@@ -50,13 +51,18 @@ public class SoccerGame : MonoBehaviour
             }
         }
     }
-
+    public void SetTargetPasses(int passes)
+    {
+        targetPasses=passes;
+        UITemplate.instance.ShowPasses(targetPasses.ToString(),successPasses.ToString());
+    }
     private void LookAtCenter()
     {
         gameCamera.transform.LookAt(center.position);
     }
     void PassBallToRandomPlayer()
     {
+        
         Debug.Log("Passing ball to random player");
         isBallFlying = false;
         correctInput = false;
@@ -132,17 +138,27 @@ public class SoccerGame : MonoBehaviour
 
         if (correctInput)
         {
-            PassBallToRandomPlayer();
+            successPasses += 1;
+            UITemplate.instance.ShowPasses(targetPasses.ToString(),successPasses.ToString());
+            if (successPasses >= targetPasses)
+            {
+                GameOver(true);
+            }
+            else
+            {
+                PassBallToRandomPlayer();
+            }
         }
         else
         {
-            GameOver();
+            GameOver(false);
         }
     }
 
-    void GameOver()
+    void GameOver(bool isWin)
     {
         Debug.Log("GameOver");
-        UITemplate.instance.EndGame();
+        UITemplate.instance.EndGame(isWin);
+        successPasses = 0;
     }
 }
