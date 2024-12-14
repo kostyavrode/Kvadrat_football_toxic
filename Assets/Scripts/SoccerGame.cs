@@ -28,6 +28,7 @@ public class SoccerGame : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Time.timeScale);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PassBallToRandomPlayer();
@@ -62,12 +63,12 @@ public class SoccerGame : MonoBehaviour
 
         // Choose a random player from the list
         GameObject previousTarget = currentTarget;
-        if (previousTarget != null)
+        //if (previousTarget != null)
             //previousTarget.GetComponent<Footballer>().Pass();
         currentTarget = players[Random.Range(0, players.Count)];
         if (previousTarget == currentTarget)
         {
-            PassBallToRandomPlayer();
+            //PassBallToRandomPlayer();
             return;
         }
 
