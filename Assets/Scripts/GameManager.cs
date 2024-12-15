@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,8 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     
-    public SwipeDetector swipeDetector;
-
     public SoccerGame levelPrefab;
     
     private SoccerGame level;
@@ -24,6 +23,12 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
+
+    private void Start()
+    {
+        ChangeGameState(GameState.MENU);
+    }
+
     private void Update()
     {
         if (gameState==GameState.PLAYING && increaseTimeScale)
@@ -42,7 +47,7 @@ public class GameManager : MonoBehaviour
                 {
                     UITemplate.instance.ShowMoney(Player.instance.GetPlayerMoney().ToString());
                     currentTimeScale=1f;
-                    Time.timeScale = currentTimeScale;
+                    Time.timeScale = 1;
                     break;
                 }
                 case GameState.PLAYING:
@@ -86,7 +91,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         level = Instantiate(levelPrefab);
-        swipeDetector.game=level;
     }
 
     public void EndGame()

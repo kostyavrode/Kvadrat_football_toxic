@@ -41,7 +41,7 @@ public class Translator : MonoBehaviour
         {
             textBars[i].text = portugales[i];
         }
-        imaheHolder.sprite = portuSprite;
+//        imaheHolder.sprite = portuSprite;
         isPortu = true;
         PlayerPrefs.SetInt("isPortu", 1);
     }

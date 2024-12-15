@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening; // Import DOTween namespace
+using DG.Tweening;
+using PixelSunsetStudio;
+using Random = UnityEngine.Random; // Import DOTween namespace
 
 public class SoccerGame : MonoBehaviour
 {
@@ -78,6 +81,8 @@ public class SoccerGame : MonoBehaviour
     {
         targetPasses=passes;
         UITemplate.instance.ShowPasses(targetPasses.ToString(),successPasses.ToString());
+        SimpleSwipeDetector.OnSwipeUp += HeadAttack;
+        SimpleSwipeDetector.OnSwipeDown += LegAttack;
     }
     private void LookAtCenter()
     {
@@ -183,5 +188,13 @@ public class SoccerGame : MonoBehaviour
         Debug.Log("GameOver");
         UITemplate.instance.EndGame(isWin);
         successPasses = 0;
+        SimpleSwipeDetector.OnSwipeUp -= HeadAttack;
+        SimpleSwipeDetector.OnSwipeDown -= LegAttack;
+    }
+
+    private void OnDisable()
+    {
+        SimpleSwipeDetector.OnSwipeUp -= HeadAttack;
+        SimpleSwipeDetector.OnSwipeDown -= LegAttack;
     }
 }
