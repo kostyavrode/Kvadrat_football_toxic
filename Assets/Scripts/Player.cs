@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        UITemplate.instance.ShowMoney(GetPlayerMoney().ToString());
     }
     public int GetPlayerMoney()
     {

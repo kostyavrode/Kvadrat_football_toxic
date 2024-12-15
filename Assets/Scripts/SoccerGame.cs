@@ -31,7 +31,6 @@ public class SoccerGame : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Time.timeScale);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PassBallToRandomPlayer();
@@ -48,6 +47,30 @@ public class SoccerGame : MonoBehaviour
             {
                 correctInput = true;
                 currentTarget.GetComponent<Footballer>().Leg();
+            }
+        }
+    }
+
+    public void HeadAttack()
+    {
+        if (isBallFlying)
+        {
+            if (targetPosition == currentTarget.transform.Find("FeetTarget").position)
+            {
+                correctInput = true;
+                currentTarget.GetComponent<Footballer>().Leg();
+            }
+        }
+    }
+
+    public void LegAttack()
+    {
+        if (isBallFlying)
+        {
+            if (targetPosition == currentTarget.transform.Find("HeadTarget").position)
+            {
+                correctInput = true;
+                currentTarget.GetComponent<Footballer>().Head();
             }
         }
     }

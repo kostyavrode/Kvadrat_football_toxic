@@ -13,6 +13,7 @@ public class UITemplate : MonoBehaviour
     
     [SerializeField] private TMP_Text moneyBar;
     [SerializeField] private TMP_Text passesBar;
+    [SerializeField] private TMP_Text winningsBar;
     private void Awake()
     {
         instance = this;
@@ -42,6 +43,9 @@ public class UITemplate : MonoBehaviour
         {
             winPanel.SetActive(true);
             PlayerPrefs.SetInt("Levels",PlayerPrefs.GetInt("Levels")+1);
+            Player.instance.AddMoney(10);
+            ShowMoney(Player.instance.GetPlayerMoney().ToString());
+            winningsBar.text="+10";
         }
         else
         {
