@@ -24,6 +24,10 @@ public class LevelChecker : MonoBehaviour
     private void CheckButtons()
     {
         int levels = PlayerPrefs.GetInt("Levels");
+        if (levels > buttons.Length)
+        {
+            levels = buttons.Length;
+        }
         if (levels == 0)
         {
             buttons[0].interactable = true;
