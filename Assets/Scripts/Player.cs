@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
     }
     public void AddMoney(int moneyToAdd)
     {
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money" + moneyToAdd));
+        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") + moneyToAdd);
+        Debug.Log(PlayerPrefs.GetInt("Money").ToString());
     }
     public void AddScore(int scoreToAdd)
     {

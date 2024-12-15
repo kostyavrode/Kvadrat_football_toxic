@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,6 +19,12 @@ public class UITemplate : MonoBehaviour
     {
         instance = this;
     }
+
+    private void Start()
+    {
+        ShowMoney(Player.instance.GetPlayerMoney().ToString());
+    }
+
     public void ShowMoney(string data)
     {
         moneyBar.text = data;
@@ -44,8 +51,8 @@ public class UITemplate : MonoBehaviour
             winPanel.SetActive(true);
             PlayerPrefs.SetInt("Levels",PlayerPrefs.GetInt("Levels")+1);
             Player.instance.AddMoney(10);
-            ShowMoney(Player.instance.GetPlayerMoney().ToString());
             winningsBar.text="+10";
+            ShowMoney(Player.instance.GetPlayerMoney().ToString());
         }
         else
         {

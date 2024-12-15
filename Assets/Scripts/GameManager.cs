@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 
     private int lastTargetPasses;
     
-
     private void Awake()
     {
         instance = this;

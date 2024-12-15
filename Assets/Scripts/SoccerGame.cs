@@ -56,24 +56,22 @@ public class SoccerGame : MonoBehaviour
 
     public void HeadAttack()
     {
-        if (isBallFlying)
         {
-            if (targetPosition == currentTarget.transform.Find("FeetTarget").position)
+            if (targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<Footballer>().Leg();
+                currentTarget.GetComponent<Footballer>().Head();
             }
         }
     }
 
     public void LegAttack()
     {
-        if (isBallFlying)
         {
-            if (targetPosition == currentTarget.transform.Find("HeadTarget").position)
+            if (targetPosition == currentTarget.transform.Find("FeetTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<Footballer>().Head();
+                currentTarget.GetComponent<Footballer>().Leg();
             }
         }
     }
@@ -90,8 +88,6 @@ public class SoccerGame : MonoBehaviour
     }
     void PassBallToRandomPlayer()
     {
-        
-        Debug.Log("Passing ball to random player");
         isBallFlying = false;
         correctInput = false;
 
