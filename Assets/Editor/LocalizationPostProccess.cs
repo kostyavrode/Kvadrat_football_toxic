@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEditor.Callbacks;
 using System.IO;
+using UnityEditor.iOS.Xcode;
 using UnityEngine;
 
 public class LocalizationPostProccess
@@ -22,8 +23,33 @@ public class LocalizationPostProccess
 
         // Настройка локализации названия приложения
         AddLocalizedDisplayNames(plistPath, pathToBuildProject, appNameEnglish, appNamePortuguese);
+        
+        AddOtherLinkerFlag(pathToBuildProject);
     }
+    private static void AddOtherLinkerFlag(string pathToBuildProject)
+    {
+        // Путь к Xcode проекту
+        string pbxProjectPath = Path.Combine(pathToBuildProject, "Unity-iPhone.xcodeproj/project.pbxproj");
 
+        // Загружаем проект
+        PBXProject project = new PBXProject();
+        project.ReadFromFile(pbxProjectPath);
+
+        // Получаем идентификатор UnityFramework
+        string unityFrameworkTarget = project.GetUnityFrameworkTargetGuid();
+
+        // Проверяем наличие флага, чтобы не дублировать
+        string otherLinkerFlags = project.GetBuildPropertyForAnyConfig(unityFrameworkTarget, "OTHER_LDFLAGS");
+        if (otherLinkerFlags == null || !otherLinkerFlags.Contains("-ld64"))
+        {
+            // Добавляем флаг -ld64
+            project.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ld64");
+            Debug.Log("Added -ld64 to Other Linker Flags for UnityFramework.");
+        }
+
+        // Сохраняем изменения
+        project.WriteToFile(pbxProjectPath);
+    }
     private static void AddLocalizedDisplayNames(string plistPath, string buildPath, string appNameEnglish, string appNamePortuguese)
     {
         // Проверяем наличие Info.plist
