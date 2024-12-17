@@ -1,80 +1,53 @@
 using UnityEditor;
 using UnityEditor.Callbacks;
-using System.IO;
 using UnityEditor.iOS.Xcode;
+using System.IO;
 using UnityEngine;
-
-public class LocalizationPostProccess
+public class LocalizationPostProcess
 {
     [PostProcessBuild]
     public static void OnPostProcessBuild(BuildTarget target, string pathToBuildProject)
     {
         if (target != BuildTarget.iOS)
-        {
             return;
+
+        // Получаем название проекта из Unity
+        string appName = PlayerSettings.productName;
+
+        // Путь к директории Xcode проекта
+        string localizationFolderPath = Path.Combine(pathToBuildProject, "en.lproj");
+
+        // Проверяем, существует ли папка для локализации, если нет — создаем её
+        if (!Directory.Exists(localizationFolderPath))
+        {
+            Directory.CreateDirectory(localizationFolderPath);
         }
 
-        // Названия приложения для разных языков
-        string appNameEnglish = "Super football square"; // Название для английского языка
-        string appNamePortuguese = "Super praça de futebol"; // Название для португальского языка
+        // Путь к файлу InfoPlist.strings
+        string stringsFilePath = Path.Combine(localizationFolderPath, "InfoPlist.strings");
 
-        // Путь к Info.plist
-        string plistPath = Path.Combine(pathToBuildProject, "Info.plist");
+        // Контент для английской локализации, используя настоящее название проекта
+        string localizedContent = $"\"CFBundleDisplayName\" = \"{appName}\";";
 
-        // Настройка локализации названия приложения
-        AddLocalizedDisplayNames(plistPath, pathToBuildProject, appNameEnglish, appNamePortuguese);
-        
-        AddOtherLinkerFlag(pathToBuildProject);
-    }
-    private static void AddOtherLinkerFlag(string pathToBuildProject)
-    {
-        // Путь к Xcode проекту
-        string pbxProjectPath = Path.Combine(pathToBuildProject, "Unity-iPhone.xcodeproj/project.pbxproj");
+        // Записываем контент в файл
+        File.WriteAllText(stringsFilePath, localizedContent);
 
-        // Загружаем проект
+        // Добавляем локализованный файл в Xcode проект
+        string pbxProjectPath = PBXProject.GetPBXProjectPath(pathToBuildProject);
         PBXProject project = new PBXProject();
         project.ReadFromFile(pbxProjectPath);
 
-        // Получаем идентификатор UnityFramework
-        string unityFrameworkTarget = project.GetUnityFrameworkTargetGuid();
+        string mainTargetGuid = project.GetUnityMainTargetGuid();
 
-        // Проверяем наличие флага, чтобы не дублировать
-        string otherLinkerFlags = project.GetBuildPropertyForAnyConfig(unityFrameworkTarget, "OTHER_LDFLAGS");
-        if (otherLinkerFlags == null || !otherLinkerFlags.Contains("-ld64"))
-        {
-            // Добавляем флаг -ld64
-            project.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ld64");
-            Debug.Log("Added -ld64 to Other Linker Flags for UnityFramework.");
-        }
+        // Добавляем файл InfoPlist.strings в проект
+        string localizationPath = $"{localizationFolderPath}/InfoPlist.strings";
+        string fileGuid = project.AddFile(localizationPath, localizationPath, PBXSourceTree.Source);
 
-        // Сохраняем изменения
+        // Привязываем файл к основной цели
+        project.AddFileToBuild(mainTargetGuid, fileGuid);
+
         project.WriteToFile(pbxProjectPath);
-    }
-    private static void AddLocalizedDisplayNames(string plistPath, string buildPath, string appNameEnglish, string appNamePortuguese)
-    {
-        // Проверяем наличие Info.plist
-        if (!File.Exists(plistPath))
-        {
-            Debug.LogError($"Info.plist not found at {plistPath}");
-            return;
-        }
 
-        // Путь к локализованным папкам
-        string enLprojPath = Path.Combine(buildPath, "en.lproj");
-        string ptLprojPath = Path.Combine(buildPath, "pt.lproj");
-
-        // Создаем локализованные папки, если их нет
-        if (!Directory.Exists(enLprojPath)) Directory.CreateDirectory(enLprojPath);
-        if (!Directory.Exists(ptLprojPath)) Directory.CreateDirectory(ptLprojPath);
-
-        // Создаем файлы InfoPlist.strings
-        string enStringsPath = Path.Combine(enLprojPath, "InfoPlist.strings");
-        string ptStringsPath = Path.Combine(ptLprojPath, "InfoPlist.strings");
-
-        // Записываем локализованные строки
-        File.WriteAllText(enStringsPath, $"\"CFBundleDisplayName\" = \"{appNameEnglish}\";");
-        File.WriteAllText(ptStringsPath, $"\"CFBundleDisplayName\" = \"{appNamePortuguese}\";");
-
-        Debug.Log("Localized display names added successfully!");
+        Debug.Log($"English localization file created with app name '{appName}' and added to Xcode project: {stringsFilePath}");
     }
 }
