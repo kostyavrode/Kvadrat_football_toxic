@@ -44,12 +44,12 @@ public class SoccerGame : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) && targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<Footballer>().Head();
+                currentTarget.GetComponent<PlayerFoot>().Up();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow) && targetPosition == currentTarget.transform.Find("FeetTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<Footballer>().Leg();
+                currentTarget.GetComponent<PlayerFoot>().Down();
             }
         }
     }
@@ -60,7 +60,7 @@ public class SoccerGame : MonoBehaviour
             if (targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<Footballer>().Head();
+                currentTarget.GetComponent<PlayerFoot>().Up();
             }
         }
     }
@@ -71,7 +71,7 @@ public class SoccerGame : MonoBehaviour
             if (targetPosition == currentTarget.transform.Find("FeetTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<Footballer>().Leg();
+                currentTarget.GetComponent<PlayerFoot>().Down();
             }
         }
     }
@@ -117,7 +117,7 @@ public class SoccerGame : MonoBehaviour
     {
         if (gameCamera != null)
         {
-            Transform cameraPos = player.GetComponent<Footballer>().cameraPos;
+            Transform cameraPos = player.GetComponent<PlayerFoot>().cam;
             Vector3 targetCameraPosition = player.transform.position +player.transform.forward*(-3)  
                                          + transform.up*2+gameCamera.transform.right*(-3);
             gameCamera.transform.DOMove(cameraPos.position, cameraMoveDuration)

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
 {
-    public AudioSource audioSourcePrefab;
+    [FormerlySerializedAs("audioSourcePrefab")] public AudioSource djPrefab;
 
     private AudioSource currentSource;
 
@@ -49,7 +50,7 @@ public class SettingsController : MonoBehaviour
             }
             catch
             {
-                currentSource = Instantiate(audioSourcePrefab);
+                currentSource = Instantiate(djPrefab);
                 DontDestroyOnLoad(currentSource.gameObject);
                 translator.gameObject.SetActive(true);
 

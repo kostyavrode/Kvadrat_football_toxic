@@ -53,6 +53,7 @@ namespace PixelSunsetStudio
                 if (dir.y > DeadZone)
                 {
                     OnSwipeUp?.Invoke();
+                    Debug.Log("Swipe Up");
                 }
                 // DOWN
                 if (dir.y < -DeadZone)

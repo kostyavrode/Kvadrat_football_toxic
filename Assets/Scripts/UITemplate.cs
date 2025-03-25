@@ -22,7 +22,7 @@ public class UITemplate : MonoBehaviour
 
     private void Start()
     {
-        ShowMoney(Player.instance.GetPlayerMoney().ToString());
+        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
     }
 
     public void ShowMoney(string data)
@@ -31,28 +31,28 @@ public class UITemplate : MonoBehaviour
     }
     public void StartGame()
     {
-        GameManager.instance.ChangeGameState(GameState.PLAYING);
+        GasManager._instance.SetNewState(Karabybliki.kaarabyblik);
     }
     public void PauseGame()
     {
-        GameManager.instance.ChangeGameState(GameState.PAUSE);
+        GasManager._instance.SetNewState(Karabybliki.nekarabyblik);
     }
     public void UnPauseGame()
     {
-        GameManager.instance.ChangeGameState(GameState.PLAYING);
+        GasManager._instance.SetNewState(Karabybliki.kaarabyblik);
     }
     public void EndGame(bool isWin)
     {
-        GameManager.instance.ChangeGameState(GameState.END);
-        ShowMoney(Player.instance.GetPlayerMoney().ToString());
+        GasManager._instance.SetNewState(Karabybliki.plakiplakikarabybliki);
+        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
         inGamePanel.SetActive(false);
         if (isWin)
         {
             winPanel.SetActive(true);
             PlayerPrefs.SetInt("Levels",PlayerPrefs.GetInt("Levels")+1);
-            Player.instance.AddMoney(10);
+            TelepyzikInformation._instance.HelpTelepyzik(10);
             winningsBar.text="+10";
-            ShowMoney(Player.instance.GetPlayerMoney().ToString());
+            ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
         }
         else
         {
@@ -66,7 +66,7 @@ public class UITemplate : MonoBehaviour
     }
     public void RestartGame()
     {
-        GameManager.instance.ChangeGameState(GameState.RESTART);
+        GasManager._instance.SetNewState(Karabybliki.renewkarabyblik);
     }
     public void ExitApp()
     {
