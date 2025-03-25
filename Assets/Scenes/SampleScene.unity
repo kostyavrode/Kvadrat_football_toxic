@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44406813, g: 0.49333978, b: 0.57239574, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -9.999968}
+  m_AnchoredPosition: {x: 0, y: -9.999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5597212
@@ -3949,7 +3949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -9.999968}
+  m_AnchoredPosition: {x: 0, y: -9.999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &452066042
@@ -4232,6 +4232,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453635590}
   m_CullTransparentMesh: 1
+--- !u!1 &454966756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 454966758}
+  - component: {fileID: 454966757}
+  - component: {fileID: 454966759}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &454966757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454966756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &454966758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454966756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &454966759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454966756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9369a50be789a1f4f8409a2f9f95b607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelChecker: {fileID: 798911796}
 --- !u!1 &455197374
 GameObject:
   m_ObjectHideFlags: 0
@@ -5110,7 +5187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -9.999968}
+  m_AnchoredPosition: {x: 0, y: -9.999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &539067074
@@ -5901,7 +5978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -9.999968}
+  m_AnchoredPosition: {x: 0, y: -9.999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618232780
@@ -6056,7 +6133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfeffe3b1caa8548b2cbea57e0479c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSourcePrefab: {fileID: 8629684310048826488, guid: cb7c56308e1266c4e89753817a7caa3c, type: 3}
+  djPrefab: {fileID: 8629684310048826488, guid: cb7c56308e1266c4e89753817a7caa3c, type: 3}
   translator: {fileID: 1738885529}
   soundButton: {fileID: 186646210}
   soundButtonText: {fileID: 1560494799}
@@ -6146,7 +6223,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 461794895}
+  m_TargetGraphic: {fileID: 677150542}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6327,7 +6404,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 461794895}
+  m_TargetGraphic: {fileID: 684636274}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7133,7 +7210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -9.999968}
+  m_AnchoredPosition: {x: 0, y: -9.999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &760187635
@@ -7419,7 +7496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5573c6fbee558b408c7f01bbead47d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
+  gasik: {fileID: 0}
+  korova: 0
+  knopochki:
   - {fileID: 1607596805}
   - {fileID: 1727773831}
   - {fileID: 1560655297}
@@ -8359,9 +8438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f57f0781ba7edf4b8b7e5f48d27b368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelPrefab: {fileID: 1600100255750790823, guid: ae672de4f60dcc94aa95f6819dfcd6ae, type: 3}
-  gameState: 0
-  increaseTimeScale: 0
+  noskiNaiti: {fileID: 1600100255750790823, guid: ae672de4f60dcc94aa95f6819dfcd6ae, type: 3}
+  Byli: 0
+  PodnyatByli: 0
 --- !u!1001 &943975673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11250,7 +11329,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 461794895}
+  m_TargetGraphic: {fileID: 1360816333}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -12373,7 +12452,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 461794895}
+  m_TargetGraphic: {fileID: 1560655298}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -12890,7 +12969,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 461794895}
+  m_TargetGraphic: {fileID: 1607596806}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -13717,7 +13796,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 461794895}
+  m_TargetGraphic: {fileID: 1727773832}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -15841,13 +15920,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c027c40ea61f744bb4109c574ae6865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costs: 6400000096000000fa000000
-  textures: []
-  buttons:
+  skolkoMonetokOdat: 6400000096000000fa000000
+  knopochki:
   - {fileID: 0}
   - {fileID: 552938546}
   - {fileID: 1385349115}
-  notenoug: {fileID: 1749729644}
+  votBlin: {fileID: 1749729644}
 --- !u!1 &2101008029
 GameObject:
   m_ObjectHideFlags: 0
@@ -16594,3 +16672,4 @@ SceneRoots:
   - {fileID: 724192233}
   - {fileID: 236788168}
   - {fileID: 2033617190}
+  - {fileID: 454966758}

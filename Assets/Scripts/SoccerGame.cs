@@ -44,12 +44,17 @@ public class SoccerGame : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) && targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<PlayerFoot>().Up();
+     //           currentTarget.GetComponent<PlayerFoot>().Up();
+                currentTarget.GetComponent<SmegmaLover>().Up();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow) && targetPosition == currentTarget.transform.Find("FeetTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<PlayerFoot>().Down();
+
+//                currentTarget.GetComponent<PlayerFoot>().Down();
+
+                currentTarget.GetComponent<SmegmaLover>().Down();
+
             }
         }
     }
@@ -60,7 +65,11 @@ public class SoccerGame : MonoBehaviour
             if (targetPosition == currentTarget.transform.Find("HeadTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<PlayerFoot>().Up();
+
+               // currentTarget.GetComponent<PlayerFoot>().Up();
+
+                currentTarget.GetComponent<SmegmaLover>().Up();
+
             }
         }
     }
@@ -71,7 +80,11 @@ public class SoccerGame : MonoBehaviour
             if (targetPosition == currentTarget.transform.Find("FeetTarget").position)
             {
                 correctInput = true;
-                currentTarget.GetComponent<PlayerFoot>().Down();
+
+//                currentTarget.GetComponent<PlayerFoot>().Down();
+
+                currentTarget.GetComponent<SmegmaLover>().Down();
+
             }
         }
     }
@@ -117,7 +130,9 @@ public class SoccerGame : MonoBehaviour
     {
         if (gameCamera != null)
         {
-            Transform cameraPos = player.GetComponent<PlayerFoot>().cam;
+
+            Transform cameraPos = player.GetComponent<SmegmaLover>().transformForCamera;
+
             Vector3 targetCameraPosition = player.transform.position +player.transform.forward*(-3)  
                                          + transform.up*2+gameCamera.transform.right*(-3);
             gameCamera.transform.DOMove(cameraPos.position, cameraMoveDuration)

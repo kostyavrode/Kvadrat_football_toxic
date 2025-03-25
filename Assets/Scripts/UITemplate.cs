@@ -22,7 +22,11 @@ public class UITemplate : MonoBehaviour
 
     private void Start()
     {
-        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
+
+//        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
+
+        ShowMoney(InfoHandler.instance.GetPlayerMoney().ToString());
+
     }
 
     public void ShowMoney(string data)
@@ -31,33 +35,43 @@ public class UITemplate : MonoBehaviour
     }
     public void StartGame()
     {
-        GasManager._instance.SetNewState(Karabybliki.kaarabyblik);
+        GagaNachalnik._instance.ChangeGameState(GameState.PLAYING);
     }
     public void PauseGame()
     {
-        GasManager._instance.SetNewState(Karabybliki.nekarabyblik);
+        GagaNachalnik._instance.ChangeGameState(GameState.PAUSE);
     }
     public void UnPauseGame()
     {
-        GasManager._instance.SetNewState(Karabybliki.kaarabyblik);
+        GagaNachalnik._instance.ChangeGameState(GameState.PLAYING);
     }
     public void EndGame(bool isWin)
     {
-        GasManager._instance.SetNewState(Karabybliki.plakiplakikarabybliki);
-        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
+        GagaNachalnik._instance.ChangeGameState(GameState.END);
+        ShowMoney(InfoHandler.instance.GetPlayerMoney().ToString());
+
         inGamePanel.SetActive(false);
         if (isWin)
         {
             winPanel.SetActive(true);
             PlayerPrefs.SetInt("Levels",PlayerPrefs.GetInt("Levels")+1);
-            TelepyzikInformation._instance.HelpTelepyzik(10);
+
+//            TelepyzikInformation._instance.HelpTelepyzik(10);
             winningsBar.text="+10";
-            ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
+//            ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
+
+            InfoHandler.instance.AddMoney(10);
+            winningsBar.text="+10";
+            ShowMoney(InfoHandler.instance.GetPlayerMoney().ToString());
+
         }
         else
         {
             losePanel.SetActive(true);
         }
+//        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
+
+        GagaNachalnik._instance.ChangeGameState(GameState.PLAYING);
     }
 
     public void ShowPasses(string target, string success)
@@ -66,7 +80,11 @@ public class UITemplate : MonoBehaviour
     }
     public void RestartGame()
     {
-        GasManager._instance.SetNewState(Karabybliki.renewkarabyblik);
+
+//        GasManager._instance.SetNewState(Karabybliki.renewkarabyblik);
+
+        GagaNachalnik._instance.ChangeGameState(GameState.RESTART);
+
     }
     public void ExitApp()
     {
