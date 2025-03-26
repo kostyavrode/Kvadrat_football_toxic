@@ -50,7 +50,7 @@ public class GagaNachalnik : MonoBehaviour
         {
             case GameState.MENU:
                 {
-                    UITemplate.instance.ShowMoney(InfoHandler.instance.GetPlayerMoney().ToString());
+                    KartinkaKakashki.instance.PokazhiDenezhki(InfoHandler.instance.GetPlayerMoney().ToString());
                     ByliVremya=1f;
                     Time.timeScale = 1;
                     break;

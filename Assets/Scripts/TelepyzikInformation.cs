@@ -22,7 +22,7 @@ public class TelepyzikInformation : MonoBehaviour
         _instance = this;
         
         
-        UITemplate.instance.ShowMoney(TelepyzikMoney().ToString());
+        KartinkaKakashki.instance.PokazhiDenezhki(TelepyzikMoney().ToString());
     }
     public int TelepyzikMoney()
     {

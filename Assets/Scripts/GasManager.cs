@@ -73,7 +73,7 @@ public class GasManager : MonoBehaviour
         {
             case Karabybliki.First:
                 {
-                    UITemplate.instance.ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
+                    KartinkaKakashki.instance.PokazhiDenezhki(TelepyzikInformation._instance.TelepyzikMoney().ToString());
                     nowTimeScalee=1f;
                     Time.timeScale = 1;
                     break;

@@ -91,7 +91,7 @@ public class SoccerGame : MonoBehaviour
     public void SetTargetPasses(int passes)
     {
         targetPasses=passes;
-        UITemplate.instance.ShowPasses(targetPasses.ToString(),successPasses.ToString());
+        KartinkaKakashki.instance.ShowPasses(targetPasses.ToString(),successPasses.ToString());
         SimpleSwipeDetector.OnSwipeUp += HeadAttack;
         SimpleSwipeDetector.OnSwipeDown += LegAttack;
     }
@@ -178,7 +178,7 @@ public class SoccerGame : MonoBehaviour
         if (correctInput)
         {
             successPasses += 1;
-            UITemplate.instance.ShowPasses(targetPasses.ToString(),successPasses.ToString());
+            KartinkaKakashki.instance.ShowPasses(targetPasses.ToString(),successPasses.ToString());
             if (successPasses >= targetPasses)
             {
                 GameOver(true);
@@ -197,7 +197,7 @@ public class SoccerGame : MonoBehaviour
     void GameOver(bool isWin)
     {
         Debug.Log("GameOver");
-        UITemplate.instance.EndGame(isWin);
+        KartinkaKakashki.instance.EndGame(isWin);
         successPasses = 0;
         SimpleSwipeDetector.OnSwipeUp -= HeadAttack;
         SimpleSwipeDetector.OnSwipeDown -= LegAttack;

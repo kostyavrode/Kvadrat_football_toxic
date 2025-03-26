@@ -10,7 +10,7 @@ public class InfoHandler : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        UITemplate.instance.ShowMoney(GetPlayerMoney().ToString());
+        KartinkaKakashki.instance.PokazhiDenezhki(GetPlayerMoney().ToString());
     }
     public int GetPlayerMoney()
     {

@@ -3,18 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class UITemplate : MonoBehaviour
+public class KartinkaKakashki : MonoBehaviour
 {
-    public static UITemplate instance;
+    public static KartinkaKakashki instance;
 
-    [SerializeField] private GameObject inGamePanel;
-    [SerializeField] private GameObject losePanel;
-    [SerializeField] private GameObject winPanel;
+    public float levell;
+
+    [FormerlySerializedAs("inGamePanel")] [SerializeField] private GameObject poigratOkno;
+    [FormerlySerializedAs("losePanel")] [SerializeField] private GameObject proebali;
+    [FormerlySerializedAs("winPanel")] [SerializeField] private GameObject goidaPanel;
     
-    [SerializeField] private TMP_Text moneyBar;
-    [SerializeField] private TMP_Text passesBar;
-    [SerializeField] private TMP_Text winningsBar;
+    [FormerlySerializedAs("moneyBar")] [SerializeField] private TMP_Text denezhkiBar;
+    [FormerlySerializedAs("passesBar")] [SerializeField] private TMP_Text yaNePonyal;
+    [FormerlySerializedAs("winningsBar")] [SerializeField] private TMP_Text GGGoidaPanel;
     private void Awake()
     {
         instance = this;
@@ -23,15 +26,16 @@ public class UITemplate : MonoBehaviour
     private void Start()
     {
 
+        levell = PlayerPrefs.GetFloat("levell");
 //        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
 
-        ShowMoney(InfoHandler.instance.GetPlayerMoney().ToString());
+        PokazhiDenezhki(InfoHandler.instance.GetPlayerMoney().ToString());
 
     }
 
-    public void ShowMoney(string data)
+    public void PokazhiDenezhki(string data)
     {
-        moneyBar.text = data;
+        denezhkiBar.text = data;
     }
     public void StartGame()
     {
@@ -48,26 +52,26 @@ public class UITemplate : MonoBehaviour
     public void EndGame(bool isWin)
     {
         GagaNachalnik._instance.ChangeGameState(GameState.END);
-        ShowMoney(InfoHandler.instance.GetPlayerMoney().ToString());
+        PokazhiDenezhki(InfoHandler.instance.GetPlayerMoney().ToString());
 
-        inGamePanel.SetActive(false);
+        poigratOkno.SetActive(false);
         if (isWin)
         {
-            winPanel.SetActive(true);
+            goidaPanel.SetActive(true);
             PlayerPrefs.SetInt("Levels",PlayerPrefs.GetInt("Levels")+1);
 
 //            TelepyzikInformation._instance.HelpTelepyzik(10);
-            winningsBar.text="+10";
+            GGGoidaPanel.text="+10";
 //            ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
 
             InfoHandler.instance.AddMoney(10);
-            winningsBar.text="+10";
-            ShowMoney(InfoHandler.instance.GetPlayerMoney().ToString());
+            GGGoidaPanel.text="+10";
+            PokazhiDenezhki(InfoHandler.instance.GetPlayerMoney().ToString());
 
         }
         else
         {
-            losePanel.SetActive(true);
+            proebali.SetActive(true);
         }
 //        ShowMoney(TelepyzikInformation._instance.TelepyzikMoney().ToString());
 
@@ -76,7 +80,7 @@ public class UITemplate : MonoBehaviour
 
     public void ShowPasses(string target, string success)
     {
-        passesBar.text = success + " | " + target;
+        yaNePonyal.text = success + " | " + target;
     }
     public void RestartGame()
     {
