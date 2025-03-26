@@ -4263,7 +4263,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 454966759}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -8633,12 +8634,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda1e08626d764c4da6972ec2aacda32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGamePanel: {fileID: 279331760}
-  losePanel: {fileID: 1518916718}
-  winPanel: {fileID: 614124057}
-  moneyBar: {fileID: 1594608752}
-  passesBar: {fileID: 455197376}
-  winningsBar: {fileID: 1185183069}
+  levell: 0
+  poigratOkno: {fileID: 279331760}
+  proebali: {fileID: 1518916718}
+  goidaPanel: {fileID: 614124057}
+  denezhkiBar: {fileID: 1594608752}
+  yaNePonyal: {fileID: 455197376}
+  GGGoidaPanel: {fileID: 1185183069}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
